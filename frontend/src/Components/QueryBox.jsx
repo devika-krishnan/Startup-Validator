@@ -18,7 +18,14 @@ import error_img from '../assets/error.png'
             setLoading(true)
             const res = await api.post('analyze/validate/',{idea:idea})
             setLoading(false)
-            navigate('/result',{state:res.data})
+            if (res.data && idea) {
+                navigate('/result',{
+                    state: {
+                        response: res.data,
+                        idea: idea
+                    }
+                })
+            }
         }
         catch(err) {
             setLoading(false)
